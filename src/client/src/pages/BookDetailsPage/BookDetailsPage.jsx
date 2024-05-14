@@ -11,19 +11,20 @@ const BookDetailsPage = () => {
     useEffect(() => {
         const fetchBookDetails = async () => {
             try {
-                const response = await fetch(`https://mlg382-project2.onrender.com/book?item_url=${item_url}`);
+                const response = await fetch(`http://localhost:5000/book?item_url=${item_url}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch book details');
                 }
                 const data = await response.json();
                 setBookDetails(data);
+                console.log(item_url)
+                console.log(data)
                 setLoading(false);
             } catch (error) {
                 setError('Error fetching book details');
                 setLoading(false);
             }
         };
-
         fetchBookDetails();
     }, [item_url]);
 
@@ -56,17 +57,15 @@ const BookDetailsPage = () => {
                     {bookDetails.reviews && bookDetails.reviews.length > 0 && (
                         <>
                             <Typography variant="h6" gutterBottom>Comments:</Typography>
-                            <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
-                                {bookDetails.reviews.map((review, index) => (
-                                    <Card key={index} style={{ marginBottom: '10px' }}>
-                                        <CardContent>
-                                            <Typography variant="body2" style={{ fontSize: "0.75rem", fontWeight: "bold", marginBottom: '0.5rem', alignSelf: 'right' }}>{review.date}</Typography>
-                                            <Typography variant="body2" style={{ fontSize: "1rem" }}>{review.content}</Typography>
-                                        </CardContent>
-                                        {index < bookDetails.reviews.length - 1 && <Divider />}
-                                    </Card>
-                                ))}
-                            </div>
+                            {bookDetails.reviews.map((review, index) => (
+                                <Card key={index} style={{ marginBottom: '10px' }}>
+                                    <CardContent>
+                                        <Typography variant="body2" style={{ fontSize: "0.75rem", fontWeight: "bold", marginBottom: '0.5rem', alignSelf: 'right' }}>{review.date}</Typography>
+                                        <Typography variant="body2" style={{ fontSize: "1rem" }}>{review.content}</Typography>
+                                    </CardContent>
+                                    {index < bookDetails.reviews.length - 1 && <Divider />}
+                                </Card>
+                            ))}
                         </>
                     )}
                 </>

@@ -9,7 +9,7 @@ import { ThemeProvider } from '@mui/material';
 const App = () => {
   const [books, setBooks] = useState([])
   useEffect(() => {
-    fetch('https://mlg382-project2.onrender.com/books', {
+    fetch('http://localhost:5000/books', {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -17,6 +17,7 @@ const App = () => {
     }).then(async res => {
       let data = await res.json()
       setBooks(data)
+      console.log(data)
     })
   }, [])
 
