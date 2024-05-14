@@ -1,5 +1,8 @@
 flask
 flask_cors
 selenium
-bs4
-ntlk
+beautifulsoup4
+nltk
+scikit-learn
+wordcloud
+numpy
