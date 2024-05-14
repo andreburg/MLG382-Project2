@@ -8,7 +8,7 @@ const HomePage = ({ books }) => {
             <Grid container spacing={3}>
                 {books.map((book, index) => (
                     <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-                        <Link to={`/book/${index}`} style={{ textDecoration: 'none' }}>
+                        <Link to={`/book/${encodeURIComponent(book.item_url)}`} style={{ textDecoration: 'none' }}>
                             <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                                 <Box sx={{ overflow: 'hidden', justifyContent: 'center', display: 'flex', alignItems: 'centre', padding: '1rem 2rem' }}>
                                     <img

@@ -1,0 +1,5 @@
+flask
+flask_cors
+selenium
+bs4
+ntlk

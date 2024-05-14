@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage/HomePage';
 import BookDetailsPage from './pages/BookDetailsPage/BookDetailsPage';
 import NavBar from './components/NavBar/NavBar';
+import theme from './theme';
+import { ThemeProvider } from '@mui/material';
+
 const App = () => {
   const [books, setBooks] = useState([])
   useEffect(() => {
@@ -18,15 +21,17 @@ const App = () => {
   }, [])
 
   return (
-    <Router>
-      <div>
-        <NavBar />
-        <Routes>
-          <Route exact path="/" element={<HomePage books={books} />} />
-          <Route path="/book/:id" element={<BookDetailsPage />} />
-        </Routes>
-      </div>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <div>
+          <NavBar />
+          <Routes>
+            <Route exact path="/" element={<HomePage books={books} />} />
+            <Route path="/book/:item_url" element={<BookDetailsPage />} />
+          </Routes>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 };
 
