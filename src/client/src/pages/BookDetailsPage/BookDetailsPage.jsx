@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Typography, CircularProgress, Card, CardContent, CardMedia, Divider } from '@mui/material';
 import { SentimentSatisfied, SentimentDissatisfied, SentimentVeryDissatisfied } from '@mui/icons-material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const BookDetailsPage = () => {
     const { item_url } = useParams();
@@ -62,7 +63,12 @@ const BookDetailsPage = () => {
 
     return (
         <div style={{ padding: '20px', margin: '2rem 10rem' }}>
-            {loading && <CircularProgress />}
+            <Link to="/" style={{ textDecoration: 'none' }}>
+                <ArrowBackIcon fontSize="large" style={{ marginBottom: '16px' }} />
+            </Link>
+            <div style={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                {loading && <CircularProgress />}
+            </div>
             {error && <Typography variant="body1" color="error">{error}</Typography>}
             {bookDetails && (
                 <>
