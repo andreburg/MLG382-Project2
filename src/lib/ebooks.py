@@ -37,7 +37,6 @@ from . import book_data
 
 
 def get_books():
-    print(books_data)
     return books_data
     # options = Options()
     # options.add_argument('--headless')
@@ -53,13 +52,11 @@ def get_books():
     #     driver.quit()
         
 def get_book(item_url):
-    print(book_data)
     return book_data[item_url]
     # options = Options()
     # options.add_argument('--headless')
     # driver = webdriver.Chrome(options=options)
     # driver.get(base_url + item_url)
-    # print(base_url + item_url)
     # try:
     #     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'productTitle')))
     #     soup = BeautifulSoup(driver.page_source, 'html.parser')

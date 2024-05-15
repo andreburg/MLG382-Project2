@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Typography, CircularProgress, Card, CardContent, CardMedia, Divider } from '@mui/material';
+import { SentimentSatisfied, SentimentDissatisfied, SentimentVeryDissatisfied } from '@mui/icons-material';
 
 const BookDetailsPage = () => {
     const { item_url } = useParams();
@@ -17,8 +18,6 @@ const BookDetailsPage = () => {
                 }
                 const data = await response.json();
                 setBookDetails(data);
-                console.log(item_url)
-                console.log(data)
                 setLoading(false);
             } catch (error) {
                 setError('Error fetching book details');
@@ -27,6 +26,39 @@ const BookDetailsPage = () => {
         };
         fetchBookDetails();
     }, [item_url]);
+
+    const renderSentimentIcon = (sentiment) => {
+        if (sentiment === 'positive') {
+            return <SentimentSatisfied style={{ color: 'green' }} />;
+        } else if (sentiment === 'neutral') {
+            return <SentimentSatisfied style={{ color: 'yellow' }} />;
+        } else if (sentiment === 'negative') {
+            return <SentimentVeryDissatisfied style={{ color: 'red' }} />;
+        }
+        return null;
+    };
+
+    const countSentiments = () => {
+        let positiveCount = 0;
+        let neutralCount = 0;
+        let negativeCount = 0;
+
+        if (bookDetails && bookDetails.reviews) {
+            bookDetails.reviews.forEach((review) => {
+                if (review.sentiment === 'positive') {
+                    positiveCount++;
+                } else if (review.sentiment === 'neutral') {
+                    neutralCount++;
+                } else if (review.sentiment === 'negative') {
+                    negativeCount++;
+                }
+            });
+        }
+
+        return { positiveCount, neutralCount, negativeCount };
+    };
+
+    const { positiveCount, neutralCount, negativeCount } = countSentiments();
 
     return (
         <div style={{ padding: '20px', margin: '2rem 10rem' }}>
@@ -54,15 +86,28 @@ const BookDetailsPage = () => {
                             )}
                         </CardContent>
                     </Card>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+                        <div>
+                            <Typography variant="h6" gutterBottom>Review Counts:</Typography>
+                            <div style={{ display: "flex", gap: '2rem', width: '100%', justifyContent: 'right' }}>
+                                <Typography variant="body2" style={{ fontWeight: 'bold' }}>Positive: {positiveCount}</Typography>
+                                <Typography variant="body2" style={{ fontWeight: 'bold' }}>Neutral: {neutralCount}</Typography>
+                                <Typography variant="body2" style={{ fontWeight: 'bold' }}>Negative: {negativeCount}</Typography>
+                            </div>
+                        </div>
+                    </div>
                     {bookDetails.reviews && bookDetails.reviews.length > 0 && (
                         <>
                             <Typography variant="h6" gutterBottom>Comments:</Typography>
                             {bookDetails.reviews.map((review, index) => (
-                                <Card key={index} style={{ marginBottom: '10px' }}>
+                                <Card key={index} style={{ marginBottom: '10px', position: 'relative', paddingBottom: '8px' }}>
                                     <CardContent>
                                         <Typography variant="body2" style={{ fontSize: "0.75rem", fontWeight: "bold", marginBottom: '0.5rem', alignSelf: 'right' }}>{review.date}</Typography>
                                         <Typography variant="body2" style={{ fontSize: "1rem" }}>{review.content}</Typography>
                                     </CardContent>
+                                    <div style={{ position: 'absolute', bottom: '5px', right: '5px', paddingBottom: '8px' }}>
+                                        {renderSentimentIcon(review.sentiment)}
+                                    </div>
                                     {index < bookDetails.reviews.length - 1 && <Divider />}
                                 </Card>
                             ))}

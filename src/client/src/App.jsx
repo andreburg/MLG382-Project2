@@ -17,7 +17,6 @@ const App = () => {
     }).then(async res => {
       let data = await res.json()
       setBooks(data)
-      console.log(data)
     })
   }, [])
 
