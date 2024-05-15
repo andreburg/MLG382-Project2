@@ -7,6 +7,7 @@ import nltk
 import string
 import re
 nltk.download('punkt')
+nltk.download('stopwords')
 
 lowercase = lambda text: text.lower()
 replace_apostrophe = lambda text: re.sub(r"'", '', text)
