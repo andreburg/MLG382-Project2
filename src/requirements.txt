@@ -7,3 +7,5 @@ scikit-learn
 gunicorn
 wordcloud
 numpy
+pandas
+joblib

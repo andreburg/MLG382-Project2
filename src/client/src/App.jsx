@@ -9,7 +9,7 @@ import { ThemeProvider } from '@mui/material';
 const App = () => {
   const [books, setBooks] = useState([])
   useEffect(() => {
-    fetch('http://localhost:5000/books', {
+    fetch('https://mlg382-project2.onrender.com/books', {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

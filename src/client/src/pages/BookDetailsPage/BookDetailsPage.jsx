@@ -12,7 +12,7 @@ const BookDetailsPage = () => {
     useEffect(() => {
         const fetchBookDetails = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/book?item_url=${item_url}`);
+                const response = await fetch(`https://mlg382-project2.onrender.com/book?item_url=${item_url}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch book details');
                 }
