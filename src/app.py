@@ -17,7 +17,7 @@ async def books():
 @app.route('/book')
 async def book_data():
     item_url = request.args.get('item_url', '')
-    model = joblib.load('src/artifacts/model.pkl')
+    model = joblib.load('artifacts/model.pkl')
     content = pd.Series([review['content'][0] for review in book_data_m[item_url]['reviews']])
     content = transform_text(content)
     content = content.apply(lambda x: ' '.join(x))
