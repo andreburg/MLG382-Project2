@@ -1,11 +1,11 @@
-# MLG382-Project2
-GitHub Repository for Project 2 MLG
+# Loan Status Classification
 
-- Andre Burger [ 577387 ]
-- Acseivire Mboto [ 576094 ]
-- Lethabo Thapelo Phofa [ 577636 ]
-- Tadiwanashe Nyoka [ 5776332 ]
-- Thubelihle Nkuna [ 577200 ]
+## Model
+- XGBoost
+
+## Web App
+- Flask API
+- React SPA
 
 ## Problem:
 __Analyze customer reviews and sentiment data to categorize them as positive, negative, or neutral, providing insights for businesses to improve customer satisfaction.__
